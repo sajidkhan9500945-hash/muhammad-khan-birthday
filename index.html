@@ -1,0 +1,473 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>index.html</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: radial-gradient(circle at top, #30205f, #100b27 55%, #050817);
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+}
+
+/* Background lighting */
+body::before {
+    content: "";
+    position: fixed;
+    width: 450px;
+    height: 450px;
+    background: #a52eff;
+    filter: blur(150px);
+    opacity: .35;
+    top: -150px;
+    left: -100px;
+    animation: glow 5s infinite alternate;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background: #00cfff;
+    filter: blur(150px);
+    opacity: .3;
+    bottom: -150px;
+    right: -100px;
+    animation: glow 6s infinite alternate-reverse;
+}
+
+@keyframes glow {
+    from { transform: scale(.8); opacity: .2; }
+    to { transform: scale(1.3); opacity: .5; }
+}
+
+/* Stars */
+.star {
+    position: fixed;
+    color: white;
+    animation: twinkle 2s infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes twinkle {
+    from { opacity: .2; transform: scale(.7); }
+    to { opacity: 1; transform: scale(1.3); }
+}
+
+/* Main content */
+.container {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+}
+
+.top-text {
+    color: #ffd66b;
+    letter-spacing: 5px;
+    font-size: 13px;
+    margin-bottom: 20px;
+    animation: appear 1.5s ease;
+}
+
+h1 {
+    font-size: clamp(35px, 7vw, 75px);
+    font-weight: 900;
+    background: linear-gradient(90deg, #ffcf70, #ff74d4, #70eaff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 35px #ff8bd655;
+    animation: titleIn 1.5s ease;
+}
+
+.name {
+    font-size: clamp(28px, 5vw, 52px);
+    margin: 15px 0;
+    color: #fff;
+    text-shadow: 0 0 15px #ff73d9, 0 0 35px #9e5bff;
+    animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+    from { text-shadow: 0 0 10px #ff73d9; }
+    to { text-shadow: 0 0 30px #ff73d9, 0 0 60px #8a5cff; }
+}
+
+.subtitle {
+    color: #d8d3ed;
+    font-size: 17px;
+    margin-bottom: 25px;
+}
+
+.card {
+    max-width: 620px;
+    width: 100%;
+    padding: 30px 25px;
+    margin: 20px 0;
+    border: 1px solid #ffffff35;
+    border-radius: 25px;
+    background: #ffffff0d;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 35px #a855f755;
+    animation: cardIn 1.5s ease;
+}
+
+.card h2 {
+    color: #ffd77b;
+    margin-bottom: 18px;
+    font-size: 27px;
+}
+
+.card p {
+    color: #eee9ff;
+    line-height: 1.9;
+    font-size: 16px;
+}
+
+.heart {
+    font-size: 35px;
+    margin: 20px;
+    animation: heartbeat 1s infinite;
+}
+
+@keyframes heartbeat {
+    50% { transform: scale(1.3); }
+}
+
+.signature {
+    color: #ffb6e7;
+    font-size: 18px;
+    margin-top: 25px;
+    line-height: 1.8;
+}
+
+/* Cake */
+.cake {
+    position: relative;
+    width: 110px;
+    height: 75px;
+    margin: 40px auto 10px;
+    background: linear-gradient(#ff91c9 0 35%, #9e4dcb 35% 100%);
+    border-radius: 12px 12px 8px 8px;
+    box-shadow: 0 8px 30px #ff66c855;
+}
+
+.cake::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 18px;
+    background: #fff0f8;
+    top: -8px;
+    left: 0;
+    border-radius: 50%;
+}
+
+.candle {
+    position: absolute;
+    width: 9px;
+    height: 35px;
+    background: #70eaff;
+    left: 50%;
+    top: -40px;
+    transform: translateX(-50%);
+    border-radius: 4px;
+}
+
+.flame {
+    position: absolute;
+    width: 15px;
+    height: 21px;
+    background: #ffda62;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    top: -20px;
+    left: -3px;
+    box-shadow: 0 0 20px #ffbd43;
+    animation: flicker .4s infinite alternate;
+}
+
+@keyframes flicker {
+    from { opacity: .7; transform: rotate(-45deg) scale(.9); }
+    to { opacity: 1; transform: rotate(-45deg) scale(1.15); }
+}
+
+/* Balloons */
+.balloon {
+    position: fixed;
+    bottom: -130px;
+    width: 36px;
+    height: 48px;
+    border-radius: 50%;
+    z-index: 1;
+    opacity: .85;
+    animation: floatUp linear forwards;
+    pointer-events: none;
+}
+
+.balloon::before {
+    content: "";
+    position: absolute;
+    bottom: -7px;
+    left: 15px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 8px solid currentColor;
+}
+
+.balloon::after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 55px;
+    background: #ffffff80;
+    top: 48px;
+    left: 18px;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-120vh) rotate(20deg);
+        opacity: 0;
+    }
+}
+
+/* Car */
+.road {
+    position: relative;
+    width: 220px;
+    height: 65px;
+    margin: 30px auto 0;
+    border-bottom: 3px dashed #ffffff70;
+}
+
+.car {
+    position: absolute;
+    bottom: 10px;
+    left: -90px;
+    width: 75px;
+    height: 27px;
+    background: linear-gradient(135deg, #ff76bd, #8b5cff);
+    border-radius: 15px 20px 5px 5px;
+    animation: drive 5s linear infinite;
+    box-shadow: 0 0 18px #ff76bd;
+}
+
+.car::before {
+    content: "";
+    position: absolute;
+    width: 37px;
+    height: 20px;
+    top: -15px;
+    left: 20px;
+    background: #79eaff;
+    border-radius: 12px 12px 0 0;
+    border: 2px solid #fff;
+}
+
+.wheel {
+    position: absolute;
+    bottom: -8px;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: #151323;
+    border: 3px solid #ddd;
+}
+
+.wheel.one { left: 10px; }
+.wheel.two { right: 10px; }
+
+@keyframes drive {
+    from { left: -90px; }
+    to { left: 240px; }
+}
+
+button {
+    margin-top: 25px;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #ff73c9, #9360ff);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 25px #b15cff80;
+    transition: .3s;
+}
+
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 35px #ff75dc;
+}
+
+footer {
+    margin-top: 35px;
+    color: #aaa1c9;
+    font-size: 12px;
+}
+
+@keyframes titleIn {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes appear {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="stars"></div>
+<div id="balloons"></div>
+
+<main class="container">
+
+    <div class="top-text">A SPECIAL GIFT FOR MY BEST FRIEND</div>
+
+    <h1>HAPPY BIRTHDAY</h1>
+
+    <div class="name">🎉 Muhammad Khan 🎉</div>
+
+    <p class="subtitle">Today is your special day! ✨</p>
+
+    <div class="card">
+
+        <h2>Dear Muhammad Khan ❤️</h2>
+
+        <p>
+            May your birthday bring endless happiness,
+            beautiful memories and success in every step of life.
+            <br>
+            May all your dreams come true and your smile
+            always shine brighter than the stars.
+            <br>
+            You are not just a friend, you are a special
+            part of my school memories!
+        </p>
+
+        <div class="heart">❤️</div>
+
+        <div class="signature">
+            With Love & Best Wishes,<br>
+            <strong>Muhammad Farhan</strong>
+        </div>
+
+    </div>
+
+    <div class="cake">
+        <div class="candle">
+            <div class="flame"></div>
+        </div>
+    </div>
+
+    <p style="color:#ffd77b; margin-top:15px;">
+        Make a Wish! 🎂
+    </p>
+
+    <button onclick="celebrate()">
+        🎈 Celebrate Birthday 🎈
+    </button>
+
+    <div class="road">
+        <div class="car">
+            <div class="wheel one"></div>
+            <div class="wheel two"></div>
+        </div>
+    </div>
+
+    <footer>
+        Made with ❤️ by Muhammad Farhan | Special Birthday Gift
+    </footer>
+
+</main>
+
+<script>
+// Create beautiful stars
+const stars = document.getElementById("stars");
+
+for (let i = 0; i < 70; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+    star.innerHTML = "✦";
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.top = Math.random() * 100 + "vh";
+    star.style.fontSize = (Math.random() * 15 + 7) + "px";
+    star.style.animationDelay = Math.random() * 3 + "s";
+    stars.appendChild(star);
+}
+
+// Create 100 colorful balloons
+const colors = [
+    "#ff4fa3", "#55dfff", "#ffd34e",
+    "#a66bff", "#53edb1", "#ff795c",
+    "#ff85ec", "#ffffff"
+];
+
+function createBalloon() {
+    const balloon = document.createElement("div");
+    balloon.className = "balloon";
+
+    const color = colors[Math.floor(Math.random() * colors.length)];
+
+    balloon.style.background = color;
+    balloon.style.color = color;
+    balloon.style.left = Math.random() * 100 + "vw";
+    balloon.style.animationDuration = (Math.random() * 5 + 6) + "s";
+    balloon.style.transform = `scale(${Math.random() * .6 + .7})`;
+
+    document.getElementById("balloons").appendChild(balloon);
+
+    setTimeout(() => balloon.remove(), 12000);
+}
+
+// Launch exactly 100 balloons on first load
+for (let i = 0; i < 100; i++) {
+    setTimeout(createBalloon, i * 100);
+}
+
+// Birthday celebration button
+function celebrate() {
+    for (let i = 0; i < 100; i++) {
+        setTimeout(createBalloon, i * 45);
+    }
+
+    const button = document.querySelector("button");
+    button.innerHTML = "🎉 Happy Birthday Muhammad Khan! 🎉";
+
+    setTimeout(() => {
+        button.innerHTML = "🎈 Celebrate Birthday 🎈";
+    }, 3000);
+}
+</script>
+
+</body>
+</html>
